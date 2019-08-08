@@ -4,32 +4,32 @@ const photon = new Photon();
 
 // A `main` function so that we can use async/await
 async function main() {
-  // // Retrieve all users
-  // const allUsers = await photon.users.findMany({
-  //   orderBy: { name: 'asc' }
+  // Retrieve all users
+  const allUsers = await photon.users.findMany({
+    include: { todos: true }
+  });
+  console.log(`Retrieved all user ordered by name: `, JSON.stringify(allUsers, null, 2));
+
+  // // Create a new post (written by an already existing user with email alice@prisma.io)
+  // const newTodo = await photon.todos.create({
+  //   data: {
+  //     title: 'Join the React Slack community',
+  //     prioritize: false,
+  //     completed: false,
+  //     author: {
+  //       connect: {
+  //         email: 'alison@prisma.io' // Should have been created during initial seeding
+  //       }
+  //     }
+  //   }
   // });
-  // console.log(`Retrieved all user ordered by name: `, allUsers);
+  // console.log(`Created a new todo: `, newTodo);
 
-  // Create a new post (written by an already existing user with email alice@prisma.io)
-  const newTodo = await photon.todos.create({
-    data: {
-      title: 'Join the React Slack community',
-      prioritize: false,
-      completed: false,
-      author: {
-        connect: {
-          email: 'alison@prisma.io' // Should have been created during initial seeding
-        }
-      }
-    }
-  });
-  console.log(`Created a new todo: `, newTodo);
-
-  // Retrieve all non completed todos
-  const allTodos = await photon.todos.findMany({
-    where: { completed: true }
-  });
-  console.log(`Retrieved all non completed todos: `, allTodos);
+  // // Retrieve all non completed todos
+  // const allTodos = await photon.todos.findMany({
+  //   where: { completed: false }
+  // });
+  // console.log(`Retrieved all non completed todos: `, allTodos);
 
   // // Retrieve all published posts
   // const allPosts = await photon.posts.findMany({
