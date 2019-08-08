@@ -1,47 +1,47 @@
-import Photon from '@generated/photon'
+import Photon from '@generated/photon';
 
-const photon = new Photon()
+const photon = new Photon();
 
 async function main() {
   const user1 = await photon.users.create({
     data: {
-      email: 'alice@prisma.io',
-      name: 'Alice',
+      email: 'tim@prisma.io',
+      name: 'Tim',
       posts: {
         create: {
-          title: 'Join us for Prisma Day 2019 in Berlin',
+          title: 'Join us for Prisma Day 2020 in Los Angeles',
           content: 'https://www.prisma.io/day/',
-          published: true,
-        },
-      },
-    },
-  })
+          published: true
+        }
+      }
+    }
+  });
   const user2 = await photon.users.create({
     data: {
-      email: 'bob@prisma.io',
-      name: 'Bob',
-      posts: {
+      email: 'tomy@prisma.io',
+      name: 'Tomy',
+      todos: {
         create: [
           {
-            title: 'Subscribe to GraphQL Weekly for community news',
-            content: 'https://graphqlweekly.com/',
-            published: true,
+            title: 'Subscribe to React Weekly for community news',
+            prioritize: false,
+            completed: false
           },
           {
-            title: 'Follow Prisma on Twitter',
-            content: 'https://twitter.com/prisma',
-            published: false,
-          },
-        ],
-      },
-    },
-  })
+            title: 'Follow Prisma on Instagram',
+            prioritize: false,
+            completed: false
+          }
+        ]
+      }
+    }
+  });
 
-  console.log({ user1, user2 })
+  console.log({ user1, user2 });
 }
 
 main()
   .catch(e => console.error(e))
   .finally(async () => {
-    await photon.disconnect()
-  })
+    await photon.disconnect();
+  });
